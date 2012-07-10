@@ -1,0 +1,19 @@
+CC = i486-mingw32-g++
+OBJ =  ./src/client.o ./src/destination.o ./src/fragment.o ./src/star.o ./src/entity.o ./src/player.o ./src/space.o ./src/game.o ./src/platform.o ./src/building.o ./src/main.o
+
+LIBS = -lallegro.dll -lallegro_image.dll -lallegro_audio.dll -lallegro_acodec.dll -lallegro_primitives.dll -lallegro_font.dll -lallegro_ttf.dll libmeh.dll
+INCS = -I/i486-mingw32/include -I./include/meh -I./include/ 
+
+CFLAGS = -g -Wall -O3 $(INCS) -D_REENTRANT -std=c++0x
+
+all: galactictaxi.exe
+
+clean:
+	rm -rf galactictaxi.exe $(OBJ) 
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+galactictaxi.exe: $(OBJ) $(LOBJ)
+	$(CC) $(OBJ) $(LOBJ) -o $@ $(LIBS)
+
